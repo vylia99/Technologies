@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Main main = new Main();
@@ -7,12 +9,16 @@ public class Main {
     }
 
     private void run() {
+        Scanner scanner = new Scanner(System.in);
         double a = 1;
         double b = 9;
-        int n = 100_000_000;
+        int n;/* 100_000_000; */
+        System.out.println("Кількість кроків = ");
+        n = scanner.nextInt();
 
 
-        int nThreads = 10;
+        int nThreads = 1 ;
+        while (nThreads<21){
         double delta = (b - a) / nThreads;
         totalResult = 0;
         finished = 0;
@@ -31,9 +37,11 @@ public class Main {
             throw new RuntimeException("Interrupted");
         }
         long finishTime = System.currentTimeMillis();
+        System.out.println("Кількість потоків = "+nThreads);
         System.out.println("Result = " + totalResult);
-        System.out.println(finishTime - startTime);
-    }
+        System.out.println("Time = " + (finishTime - startTime));
+            nThreads ++;
+    }}
 
     public synchronized void send(double v) {
         totalResult += v;
